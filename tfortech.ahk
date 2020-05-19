@@ -11,8 +11,6 @@ Loop, Parse, Alphabet ;This loop dynamically creates passthrough hotkeys so the 
     HotKey, $%A_LoopField%, lower_case_input
   }
   
-  ;MsgBox +%A_LoopField%
-  
   if !IsLabel(+%A_LoopField%)
   {
     HotKey, +$%A_LoopField%, shift_input
