@@ -21,12 +21,17 @@ Loop, Parse, Alphabet ;This loop dynamically creates passthrough hotkeys so the 
 }
 return
 
+ShouldDisable()
+{
+  return GetKeyState("CapsLock","t")
+}
+
 lower_case_input: ;This runs on lower case inputs that don't have a specific function, including when capslock is on
   Send % StrReplace(A_ThisHotkey, "$") ;This always outputs lowercase
 return
 
 shift_input:
-  if(GetKeyState("CapsLock","t")) {
+  if(ShouldDisable()) {
     StringUpper , OutputVar, A_ThisHotkey
     Send % StrReplace(OutputVar, "$")
   }
@@ -39,7 +44,7 @@ return
 
 Technology_Window:
 t::
-if(GetKeyState("CapsLock","t")) { ;To disable when capslock is on
+if(ShouldDisable()) { ;To disable when capslock is on
   Send t
 }
 else {
